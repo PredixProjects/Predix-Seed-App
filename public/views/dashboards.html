@@ -1,0 +1,27 @@
+ <px-rangepicker is-utc range="{{dateRange}}"></px-rangepicker>
+ <div class="row" style="position: relative;">
+  <div class="col-sm-4"><px-card icon="" header-text="Pending Invoice" chevron=[[item.chevron]]>
+                          <h4>Hello World1</h4>
+                          <p>This is the bare minimum you need for a Predix Experience card.</p>
+  </px-card></div>
+  <div class="col-sm-4"><px-card icon=""  header-text="Inprogress Invoice" chevron=[[item.chevron]]>
+                          <h4>Hello World2</h4>
+                          <p>This is the bare minimum you need for a Predix Experience card.</p>
+  </px-card></div>
+  <div class="col-sm-4"><px-card icon="" header-text="Completed Invoice" chevron=[[item.chevron]]>
+                          <h4>Hello World3</h4>
+                          <p>This is the bare minimum you need for a Predix Experience card.</p>
+  </px-card></div>
+</div>
+<px-card icon="" header-text="Invoice Report" chevron=[[item.chevron]]>
+                <px-simple-bar-chart
+                    id="responsive-chart"
+                    chart-data="[
+                        [2,3,4],
+                        [5,6,7],
+                        [6,7,8]                    
+                    ]"
+                    width="500"
+                    height="200"
+                >&hearts;</px-simple-bar-chart>
+</px-card>

@@ -1,0 +1,13 @@
+---
+applications:
+  - name: predix-seed-birlasoft-app
+    buildpack: predix_openresty_buildpack
+    path: dist
+    memory: 64M
+    stack: cflinuxfs2
+    services:
+            - puneet.redis.service # change this to your redis service instance name
+            - birlasoft_viewer # change this to your view service instance name
+    env:
+      UAA_SERVER_URL: https://5c8cc0e1-9b1f-44e5-9d3e-06d878ac8960.predix-uaa.run.aws-usw02-pr.ice.predix.io # change to your UAA instance url
+      REDIS: redis-1
