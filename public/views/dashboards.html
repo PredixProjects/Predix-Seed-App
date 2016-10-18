@@ -1,27 +1,139 @@
- <px-rangepicker is-utc range="{{dateRange}}"></px-rangepicker>
- <div class="row" style="position: relative;">
-  <div class="col-sm-4"><px-card icon="" header-text="Pending Invoice" chevron=[[item.chevron]]>
-                          <h4>Hello World1</h4>
-                          <p>This is the bare minimum you need for a Predix Experience card.</p>
-  </px-card></div>
-  <div class="col-sm-4"><px-card icon=""  header-text="Inprogress Invoice" chevron=[[item.chevron]]>
-                          <h4>Hello World2</h4>
-                          <p>This is the bare minimum you need for a Predix Experience card.</p>
-  </px-card></div>
-  <div class="col-sm-4"><px-card icon="" header-text="Completed Invoice" chevron=[[item.chevron]]>
-                          <h4>Hello World3</h4>
-                          <p>This is the bare minimum you need for a Predix Experience card.</p>
-  </px-card></div>
+ <link rel="import" href="bower_components/paper-card/paper-card.html">
+ <link rel="import" href="bower_components/iron-icon/iron-icon.html">
+ <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+ <link rel="import" href="bower_components/iron-icons/social-icons.html">
+ <link rel="import" href="bower_components/iron-icons/hardware-icons.html">
+ <link rel="import" href="bower_components/iron-icons/communication-icons.html">
+ <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+ <link rel="import" href="bower_components/paper-icon-button/paper-icon-button-light.html">
+ <link rel="import" href="bower_components/iron-swipeable-container/iron-swipeable-container.html">
+ <link rel="import" href="bower_components/paper-button/paper-button.html">
+ <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+ <style is="custom-style">
+path {  stroke: #fff; }
+path:hover {  opacity:0.9; }
+rect:hover {  fill:Gold ; }
+.axis {  font: 10px sans-serif; }
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {  display: none; }
+.legend{
+    margin-bottom:76px;
+    display:inline-block;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+.legend td{
+    padding:4px 5px;
+    vertical-align:bottom;
+}
+.legendFreq, .legendPerc{
+    align:right;
+    width:50px;
+}
+	#inv-cards #red-card {
+		--paper-card-header-color:#D8000C;
+		--paper-card-header:{background-color:#FFBABA;}
+	}
+	#inv-cards #green-card {
+		--paper-card-header-color:#4F8A10;
+		--paper-card-header:{background-color:#DFF2BF;}
+	}
+	#inv-cards #blue-card {
+		--paper-card-header-color:#00529B;
+		--paper-card-header:{background-color:#BDE5F8;}
+	}
+ </style>
+ <px-card header-text="Choose Your Filters">
+ <div style="width: 250px;">
+ <select ng-model="selecteditem" ng-change="changeItem=selecteditem" >
+  <option ng-repeat="x in items" value="{{x.key}}">{{x.val}}</option>
+</select>
 </div>
-<px-card icon="" header-text="Invoice Report" chevron=[[item.chevron]]>
-                <px-simple-bar-chart
-                    id="responsive-chart"
-                    chart-data="[
-                        [2,3,4],
-                        [5,6,7],
-                        [6,7,8]                    
-                    ]"
-                    width="500"
-                    height="200"
-                >&hearts;</px-simple-bar-chart>
+</px-card>
+
+ <px-card header-text="Invoice Summary">
+<div id="inv-cards" class="horizontal">
+  <paper-card id="green-card" elevation="3"  heading="Closed Invoice" header-class="" style="width:33%;min-width:300px;color:#4F8A10;border:1px solid;vertical-align: top;" alt="Emmental">
+  <div id="dashInProDiv" class="card-content horizontal justified" style="font-size: xx-large;font-weight: bold;" >
+   {{invioceData.Pending}}
+  </div>
+  <div class="card-actions horizontal justified">
+   <a href="predixdata?color=green&data=" tabindex="-1">
+    <paper-button>View Details</paper-button></a>
+	<paper-icon-button icon="hardware:keyboard-arrow-up" title="more info" onclick="_toggle_green()" style="float:right;">
+    </paper-icon-button>
+    <iron-collapse id="more-info-green" style="width:100%;">
+
+    </iron-collapse>
+    <script>
+      function _toggle_green() {
+        var moreInfo = document.getElementById('more-info-green');
+        var iconButton = Polymer.dom(event).localTarget;
+        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up'
+                                          : 'hardware:keyboard-arrow-down';
+        moreInfo.toggle();
+      }
+    </script>
+  </div>
+</paper-card>
+   <paper-card id="blue-card"   elevation="3" heading="Pending Invoice" style="width:33%;min-width:300px;color:#00529B;border:1px solid;vertical-align: top;" alt="Emmental">
+  <div id="dashPendDiv"class="card-content horizontal justified" style="font-size: xx-large;font-weight: bold;">
+  {{invioceData.Closed}}
+  </div>
+  <div class="card-actions horizontal justified">
+  <a href="predixdata?color=blue&data=" tabindex="-1">
+    <paper-button>View Details</paper-button></a>
+	<paper-icon-button icon="hardware:keyboard-arrow-up" title="more info" onclick="_toggle_blue()" style="float:right;">
+    </paper-icon-button>
+    <iron-collapse id="more-info-blue" style="width:100%;">
+   
+    </iron-collapse>
+    <script>
+      function _toggle_blue() {
+        var moreInfo = document.getElementById('more-info-blue');
+        var iconButton = Polymer.dom(event).localTarget;
+        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up'
+                                          : 'hardware:keyboard-arrow-down';
+        moreInfo.toggle();
+      }
+    </script>
+  </div>
+</paper-card>
+   <paper-card id="red-card" elevation="3" heading="Invoice On Hold" style="width:33%;min-width:300px;color:#D8000C;border:1px solid;vertical-align: top;" alt="Emmental">
+  <div id="dashHoldDiv" class="card-content horizontal justified" style="font-size: xx-large;font-weight: bold;">
+ {{invioceData.Hold}}
+  </div>
+  <div class="card-actions horizontal justified">
+  <a href="predixdata?color=red&data=" tabindex="-1">
+    <paper-button>View Details</paper-button></a>
+	<paper-icon-button icon="hardware:keyboard-arrow-up" title="more info" onclick="_toggle_red()" style="float:right;">
+    </paper-icon-button>
+    <iron-collapse id="more-info-red" style="width:100%;">
+
+    </iron-collapse>
+    <script>
+      function _toggle_red() {
+        var moreInfo = document.getElementById('more-info-red');
+        var iconButton = Polymer.dom(event).localTarget;
+        iconButton.icon = moreInfo.opened ? 'hardware:keyboard-arrow-up'
+                                          : 'hardware:keyboard-arrow-down';
+        moreInfo.toggle();
+      }
+    </script>
+  </div>
+</paper-card>
+</div>
+</px-card>
+<px-card  header-text="Overview">
+<div id='dashboard'>
+</div>
 </px-card>

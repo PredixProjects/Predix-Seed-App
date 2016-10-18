@@ -411,6 +411,19 @@ Datagrid View deck is shown for the parent tag (ids may change)
 	[{"value":"parent"}]
 	
 
+### View the final result!
+cf push again, and your application should now look just like the demo seed app.
 
+## Questions?
+- Ask questions and file tickets on <a href="https://www.predix.io/community" target="_blank">https://www.predix.io/community</a>.
+
+# Copyright
+Copyright &copy; 2015 GE Global Research. All rights reserved.
+
+The copyright to the computer software herein is the property of
+GE Global Research. The software may be used and/or copied only
+with the written permission of GE Global Research or in accordance
+with the terms and conditions stipulated in the agreement/contract
+under which the software has been supplied.
 
 

@@ -35,10 +35,14 @@ define(['angular', 'angular-ui-router'], function(angular) {
                 templateUrl: 'views/dashboards.html',
                 controller: 'DashboardsCtrl'
             })
-            .state('supllier', {
-                url: '/supllier',
-                templateUrl: 'views/customer.html',
-				controller: 'customerDetailCtrl'
+            .state('supplier', {
+                url: '/supplier',
+                templateUrl: 'views/dashboards.html',
+				controller: 'supplierDetailCtrl'
+            }).state('predixdata', {
+                url: '/predixdata',
+                templateUrl: 'views/predixdata.html',
+				controller: 'PredixDataCtrl'
             });
 
         $urlRouterProvider.otherwise(function ($injector) {

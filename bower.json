@@ -37,7 +37,9 @@
     "requirejs": "https://github.com/jrburke/requirejs.git#2.1.18",
     "requirejs-plugins": "1.0.2",
     "google-analytics": "~0.1.0",
-    "platform": "Polymer/platform#^0.4.2"
+    "platform": "Polymer/platform#^0.4.2",
+    "paper-card": "^0.1.5",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.1.2"
   },
   "resolutions": {
     "web-animations-js": "~2.0.0"
